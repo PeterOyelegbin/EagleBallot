@@ -20,14 +20,14 @@ from rest_framework import permissions
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from accounts.views import SignUpView, LogInView, LogOutView
+from accounts.views import SignUpView, TokenValidationView, RegenerateTokenView, LogInView, LogOutView
 
 # Swagger UI
 schema_view = get_schema_view(
    openapi.Info(
       title="EagleBallot API",
       default_version='v1',
-      description="Backend API for EagleBallot, a remote voting platform to enhance Nigeria elctoral process.",
+      description="Backend API for EagleBallot, a remote voting platform to enhance Nigeria electoral process.",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@eagleballot.local"),
       license=openapi.License(name="BSD License"),
@@ -40,6 +40,8 @@ schema_view = get_schema_view(
 # APP urls
 router = DefaultRouter(trailing_slash=False)
 router.register(r"v1/account/signup", SignUpView, basename="signup")
+router.register(r"v1/account/signup/token", TokenValidationView, basename="verify-token")
+router.register(r"v1/account/signup/token/regenerate", RegenerateTokenView, basename="regenerate-token")
 router.register(r"v1/account/login", LogInView, basename="login")
 router.register(r"v1/account/logout", LogOutView, basename="logout")
 

@@ -1,7 +1,8 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
-import requests
+from django.core.mail import EmailMultiAlternatives
+import requests, random, string
 
 
 base_url = "https://api.sandbox.youverify.co/"
@@ -11,7 +12,7 @@ headers = {
     "Content-Type": "application/json",
 }
 
-# user ID verifivation function
+# user ID verification function
 def verify_id(user_id):
     url = base_url + "v2/api/identity/ng/nin"
     data = {
@@ -20,6 +21,11 @@ def verify_id(user_id):
     }
     response = requests.post(url, headers=headers, json=data)
     return response
+
+
+# otp generation function
+def generate_otp():
+    return ''.join(random.choices(string.digits, k=6))
 
 
 """
@@ -47,3 +53,12 @@ class UserModelManager(BaseUserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError(_("Superuser must have is_superuser=True."))
         return self.create_user(email, password, **extra_fields)
+
+
+# Asynchronous email sending
+def send_async_email(subject, message, from_email, recipient_list):
+    try:
+        email = EmailMultiAlternatives(subject, message, from_email, recipient_list)
+        email.send()
+    except Exception as e:
+        print(f"Error sending email: {e}")

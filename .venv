@@ -1,0 +1,21 @@
+SECRET_KEY=0yelegbin@96
+DEBUG=True
+DB_NAME=philipoy_eballot
+DB_HOST=131.153.147.34
+DB_PORT=5432
+DB_USER=philipoy_peter
+DB_PASS=Mayowa_96
+YV_API_KEY=GFMoWgfe.evnA7hVoaT3pgb9rhrLmz4hVNIyCFzdBpQ63
+CLOUD_NAME=chosen1
+API_KEY=259953999733973
+API_SECRET=BIhcZhZbpIz8zYAYuidnLTRAZoo
+EMAIL_HOST=mail.dap-alertgroup.com.ng
+EMAIL_PORT=587
+EMAIL_HOST_USER=noreply@dap-alertgroup.com.ng
+EMAIL_HOST_PASSWORD=Alertgrp@132
+
+# DB_NAME=dapalert_portfolio
+# DB_HOST=52.49.171.158
+# DB_USER=dapalert_admin
+# DB_PORT=5432
+# DB_PASS=HerbertM@132

@@ -14,6 +14,21 @@ class SignUpSerializer(serializers.ModelSerializer):
         return user
 
 
+class TokenSerializer(serializers.Serializer):
+    voters_id = serializers.CharField(write_only=True)
+    otp_code = serializers.CharField(write_only=True)
+
+    class Meta:
+        fields = ("voters_id", "otp_code")
+
+
+class RegenerateTokenSerializer(serializers.Serializer):
+    voters_id = serializers.CharField(write_only=True)
+    
+    class Meta:
+        fields = ("voters_id")
+
+
 class LogInSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(min_length=6, write_only=True)
